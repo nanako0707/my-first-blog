@@ -12,4 +12,6 @@ urlpatterns = [
     # (例)http://127.0.0.1:8000/post/5 というアドレスにアクセスしてきたら、views.post_detail が正しい行き先だということをDjango に伝える
     # name='post_list' は、ビューを識別するために使われるURL の名前
     path('post/<int:pk>/', views.post_detail, name='post_detail'),
+    path('post/new/', views.post_new, name='post_new'),
+    path('post/<int:pk>/edit/', views.post_edit, name='post_edit')
 ]
