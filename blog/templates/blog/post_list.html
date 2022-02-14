@@ -1,22 +1,16 @@
-<html>
+{% extends 'blog/base.html' %}
 
-<head>
-    <title>Django Girls blog</title>
-</head>
-
-<body>
-    <div>
-        <h1><a href="/">Django Girls Blog</a></h1>
-    </div>
-
+{% block content %}
     {% for post in posts %}
-    <div>
-        <p>published: {{ post.published_date }}</p>
-        <h2><a href="">{{ post.title }}</a></h2>
-        <!-- linebreaksbr はpost のテキスト中の改行を段落に変換するフィルタに通す -->
-        <p>{{ post.text|linebreaksbr }}</p>
-    </div>
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <!-- post_detail の部分は、Django がblog/urls.py に書かれた name=post_detail のURL を待ち受けることを意味。 -->
+            <!-- pk はプライマリキーの略。データベースの各レコードのユニークな名前。 Post モデルでプライマリキーを指定しなかったため、Django は一つのキーを作成し、各投稿にpk というフィールド名で追加する。 -->
+            <!-- post.pk と書くことでプライマリキーにアクセスできる。 -->
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
     {% endfor %}
-</body>
-
-</html>
+{% endblock %}
